@@ -46,7 +46,7 @@ describe('recipe-lab routes', () => {
       .get('/api/v1/recipes')
       .then(res => {
         recipes.forEach(recipe => {
-          expect(res.body).toContainEqual(recipe);
+          expect(res.body).toEqual(expect.arrayContaining(recipes));
         });
       });
   });
@@ -89,7 +89,7 @@ describe('recipe-lab routes', () => {
 
   it('finds a recipe by id', async() => {
     const recipe = await Recipe.insert({
-      name: 'excellent cookies',
+      name: 'good cookies',
       directions: [
         'preheat oven to 375',
         'mix ingredients',
