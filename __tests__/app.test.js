@@ -19,7 +19,17 @@ describe('recipe-lab routes', () => {
           'mix ingredients',
           'put dough on cookie sheet',
           'bake for 10 minutes'
-        ]
+        ],
+        ingredients: {
+          flour: {
+            amount: '1',
+            measurement: 'cup'
+          },
+          sugar: {
+            amount: '4',
+            measurement: 'tablespoons'
+          },
+        }
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -30,7 +40,17 @@ describe('recipe-lab routes', () => {
             'mix ingredients',
             'put dough on cookie sheet',
             'bake for 10 minutes'
-          ]
+          ],
+          ingredients: {
+            flour: {
+              amount: '1',
+              measurement: 'cup'
+            },
+            sugar: {
+              amount: '4',
+              measurement: 'tablespoons'
+            },
+          }
         });
       });
   });
@@ -61,6 +81,16 @@ describe('recipe-lab routes', () => {
         'put dough on cookie sheet',
         'bake for 10 minutes'
       ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
     });
 
     return request(app)
@@ -72,7 +102,17 @@ describe('recipe-lab routes', () => {
           'mix ingredients',
           'put dough on cookie sheet',
           'bake for 10 minutes'
-        ]
+        ],
+        ingredients: {
+          flour: {
+            amount: '1',
+            measurement: 'cup'
+          },
+          sugar: {
+            amount: '4',
+            measurement: 'tablespoons'
+          },
+        }
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -83,7 +123,17 @@ describe('recipe-lab routes', () => {
             'mix ingredients',
             'put dough on cookie sheet',
             'bake for 10 minutes'
-          ]
+          ],
+          ingredients: {
+            flour: {
+              amount: '1',
+              measurement: 'cup'
+            },
+            sugar: {
+              amount: '4',
+              measurement: 'tablespoons'
+            },
+          }
         });
       });
   });
@@ -96,7 +146,17 @@ describe('recipe-lab routes', () => {
         'mix ingredients',
         'put dough on cookie sheet',
         'bake for 10 minutes'
-      ]
+      ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
     });
 
     const response = await request(app)
@@ -113,7 +173,17 @@ describe('recipe-lab routes', () => {
         'mix ingredients',
         'put dough on cookie sheet',
         'bake for 10 minutes'
-      ]
+      ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
     });
 
     const response = await request (app)
