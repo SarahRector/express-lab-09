@@ -19,7 +19,17 @@ describe('recipe-lab routes', () => {
           'mix ingredients',
           'put dough on cookie sheet',
           'bake for 10 minutes'
-        ]
+        ],
+        ingredients: {
+          flour: {
+            amount: '1',
+            measurement: 'cup'
+          },
+          sugar: {
+            amount: '4',
+            measurement: 'tablespoons'
+          },
+        }
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -30,7 +40,17 @@ describe('recipe-lab routes', () => {
             'mix ingredients',
             'put dough on cookie sheet',
             'bake for 10 minutes'
-          ]
+          ],
+          ingredients: {
+            flour: {
+              amount: '1',
+              measurement: 'cup'
+            },
+            sugar: {
+              amount: '4',
+              measurement: 'tablespoons'
+            },
+          }
         });
       });
   });
@@ -45,8 +65,9 @@ describe('recipe-lab routes', () => {
     return request(app)
       .get('/api/v1/recipes')
       .then(res => {
+        // eslint-disable-next-line no-unused-vars
         recipes.forEach(recipe => {
-          expect(res.body).toContainEqual(recipe);
+          expect(res.body).toEqual(expect.arrayContaining(recipes));
         });
       });
   });
@@ -60,6 +81,16 @@ describe('recipe-lab routes', () => {
         'put dough on cookie sheet',
         'bake for 10 minutes'
       ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
     });
 
     return request(app)
@@ -71,7 +102,17 @@ describe('recipe-lab routes', () => {
           'mix ingredients',
           'put dough on cookie sheet',
           'bake for 10 minutes'
-        ]
+        ],
+        ingredients: {
+          flour: {
+            amount: '1',
+            measurement: 'cup'
+          },
+          sugar: {
+            amount: '4',
+            measurement: 'tablespoons'
+          },
+        }
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -82,8 +123,72 @@ describe('recipe-lab routes', () => {
             'mix ingredients',
             'put dough on cookie sheet',
             'bake for 10 minutes'
-          ]
+          ],
+          ingredients: {
+            flour: {
+              amount: '1',
+              measurement: 'cup'
+            },
+            sugar: {
+              amount: '4',
+              measurement: 'tablespoons'
+            },
+          }
         });
       });
+  });
+
+  it('finds a recipe by id', async() => {
+    const recipe = await Recipe.insert({
+      name: 'good cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
+    });
+
+    const response = await request(app)
+      .get(`/api/v1/recipes/${recipe.id}`);
+
+    expect(response.body).toEqual(recipe);
+  });
+
+  it('deletes a recipe', async() => {
+    const recipe = await Recipe.insert({
+      name: 'excellent cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+      ingredients: {
+        flour: {
+          amount: '1',
+          measurement: 'cup'
+        },
+        sugar: {
+          amount: '4',
+          measurement: 'tablespoons'
+        },
+      }
+    });
+
+    const response = await request (app)
+      .delete(`/api/v1/recipes/${recipe.id}`);
+
+    expect(response.body).toEqual(recipe);
   });
 });
