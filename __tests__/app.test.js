@@ -45,6 +45,7 @@ describe('recipe-lab routes', () => {
     return request(app)
       .get('/api/v1/recipes')
       .then(res => {
+        // eslint-disable-next-line no-unused-vars
         recipes.forEach(recipe => {
           expect(res.body).toEqual(expect.arrayContaining(recipes));
         });
